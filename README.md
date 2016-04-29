@@ -37,3 +37,16 @@ In case of mapping, configure IP address of sentinel server. Read more in [docum
 
 ###`ANNOUNCE_PORT`
 In case of mapping, configure mapped port of sentinel server. Read more in [documentation](Sentinel, Docker, NAT, and possible issues).
+
+###`DOWN_AFTER`
+Time in milliseconds an instance should not be reachable for a Sentinel starting to think it is down. Default value `1500`.
+
+###`FAILOVER_TIMEOUT`
+Wait time before failover retry of the same master. Default value `30000`.
+
+###`PARALLEL_SYNCS`
+Sets the number of slaves that can be reconfigured to use the new master after a failover at the same time. Default value `1`.
+
+###`SLAVES`
+Manually configure all the slaves of monitored master. Expected format: `ip_address:host;ip_address:host`.
+

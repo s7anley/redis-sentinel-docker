@@ -13,6 +13,15 @@ GROUP_NAME=$GROUP_NAME
 MASTER_PORT=$MASTER_PORT
 : ${MASTER_PORT:=6379}
 
+DOWN_AFTER=$DOWN_AFTER
+: ${DOWN_AFTER:=1500}
+
+FAILOVER_TIMEOUT=$FAILOVER_TIMEOUT
+: ${FAILOVER_TIMEOUT:=30000}
+
+PARALLEL_SYNCS=$PARALLEL_SYNCS
+: ${PARALLEL_SYNCS:=1}
+
 echo "port 26379" >> $SENTINEL_CONFIGURATION_FILE
 
 if [ "$ANNOUNCE_IP" ]; then
@@ -24,5 +33,19 @@ if [ "$ANNOUNCE_PORT" ]; then
 fi
 
 echo "sentinel monitor $GROUP_NAME $MASTER_IP $MASTER_PORT $QUORUM" >> $SENTINEL_CONFIGURATION_FILE
+echo "sentinel down-after-milliseconds $GROUP_NAME $DOWN_AFTER" >> $SENTINEL_CONFIGURATION_FILE
+echo "sentinel failover-timeout $GROUP_NAME $FAILOVER_TIMEOUT" >> $SENTINEL_CONFIGURATION_FILE
+echo "sentinel parallel-syncs $GROUP_NAME $PARALLEL_SYNCS" >> $SENTINEL_CONFIGURATION_FILE
+
+if [ "$SLAVES" ]; then
+    for SLAVE in $(echo $SLAVES | tr ";" "\n")
+    do
+        if [ "$SLAVE" ]; then
+            HOST=${SLAVE%:*}
+            PORT=${SLAVE#*:}
+            echo "sentinel known-slave $GROUP_NAME $HOST $PORT" >> $SENTINEL_CONFIGURATION_FILE
+        fi
+    done
+fi
 
 redis-server $SENTINEL_CONFIGURATION_FILE --sentinel
