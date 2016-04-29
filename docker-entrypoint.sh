@@ -4,6 +4,10 @@ set -e
 
 SENTINEL_CONFIGURATION_FILE=/etc/sentinel.conf
 
+if [ "$AWS_IP_DISCOVERY" ]; then
+   ANNOUNCE_IP=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
+fi
+
 QUORUM=$QUORUM
 : ${QUORUM:=2}
 

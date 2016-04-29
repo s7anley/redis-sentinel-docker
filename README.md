@@ -50,3 +50,5 @@ Sets the number of slaves that can be reconfigured to use the new master after a
 ###`SLAVES`
 Manually configure all the slaves of monitored master. Expected format: `ip_address:host;ip_address:host`.
 
+###`AWS_IP_DISCOVERY`
+Use internal IP address of AWS EC2 machine as `ANNOUNCE_IP`.
