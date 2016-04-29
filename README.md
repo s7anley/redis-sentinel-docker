@@ -1,3 +1,7 @@
+[![Docker Pulls](https://img.shields.io/docker/pulls/s7anley/redis-sentinel-docker.svg)](https://hub.docker.com/r/s7anley/redis-sentinel-docker/)
+[![Docker Stars](https://img.shields.io/docker/stars/s7anley/redis-sentinel-docker.svg)](https://hub.docker.com/r/s7anley/redis-sentinel-docker/)
+[![](https://badge.imagelayers.io/s7anley/redis-sentinel-docker:latest.svg)](https://imagelayers.io/?images=s7anley/redis-sentinel-docker:latest)
+
 redis-sentinel-docker
 ===
 
@@ -19,36 +23,36 @@ Sentinel with start monitoring Redis instance running on provided IP address and
 
 Environment Variables
 ---
-###`MASTER_IP`
+`MASTER_IP`
 IP address of running Redis master.
 
-###`MASTER_PORT`
+`MASTER_PORT`
 Redis master port. Default value is `6379`.
 
-###`GROUP_NAME`
+`GROUP_NAME`
 Unique name for master group. Default value is `mymaster`.
 
-###`QUORUM`
+`QUORUM`
 Number of Sentinels that need to agree about the fact the master is not reachable, in order for really mark the slave as failing, and eventually start a fail over procedure if possible.
 Default value is `2`.
 
-###`ANNOUNCE_IP`
+`ANNOUNCE_IP`
 In case of mapping, configure IP address of sentinel server. Read more in [documentation](Sentinel, Docker, NAT, and possible issues).
 
-###`ANNOUNCE_PORT`
+`ANNOUNCE_PORT`
 In case of mapping, configure mapped port of sentinel server. Read more in [documentation](Sentinel, Docker, NAT, and possible issues).
 
-###`DOWN_AFTER`
+`DOWN_AFTER`
 Time in milliseconds an instance should not be reachable for a Sentinel starting to think it is down. Default value `1500`.
 
-###`FAILOVER_TIMEOUT`
+`FAILOVER_TIMEOUT`
 Wait time before failover retry of the same master. Default value `30000`.
 
-###`PARALLEL_SYNCS`
+`PARALLEL_SYNCS`
 Sets the number of slaves that can be reconfigured to use the new master after a failover at the same time. Default value `1`.
 
-###`SLAVES`
+`SLAVES`
 Manually configure all the slaves of monitored master. Expected format: `ip_address:host;ip_address:host`.
 
-###`AWS_IP_DISCOVERY`
+`AWS_IP_DISCOVERY`
 Use internal IP address of AWS EC2 machine as `ANNOUNCE_IP`.
