@@ -31,3 +31,9 @@ Unique name for master group. Default value is `mymaster`.
 ###`QUORUM`
 Number of Sentinels that need to agree about the fact the master is not reachable, in order for really mark the slave as failing, and eventually start a fail over procedure if possible.
 Default value is `2`.
+
+###`ANNOUNCE_IP`
+In case of mapping, configure IP address of sentinel server. Read more in [documentation](Sentinel, Docker, NAT, and possible issues).
+
+###`ANNOUNCE_PORT`
+In case of mapping, configure mapped port of sentinel server. Read more in [documentation](Sentinel, Docker, NAT, and possible issues).
