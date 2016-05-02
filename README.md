@@ -1,6 +1,4 @@
-[![Docker Pulls](https://img.shields.io/docker/pulls/s7anley/redis-sentinel-docker.svg)](https://hub.docker.com/r/s7anley/redis-sentinel-docker/)
-[![Docker Stars](https://img.shields.io/docker/stars/s7anley/redis-sentinel-docker.svg)](https://hub.docker.com/r/s7anley/redis-sentinel-docker/)
-[![](https://badge.imagelayers.io/s7anley/redis-sentinel-docker:latest.svg)](https://imagelayers.io/?images=s7anley/redis-sentinel-docker:latest)
+[![Docker Pulls](https://img.shields.io/docker/pulls/s7anley/redis-sentinel-docker.svg)](https://hub.docker.com/r/s7anley/redis-sentinel-docker/) [![Docker Stars](https://img.shields.io/docker/stars/s7anley/redis-sentinel-docker.svg)](https://hub.docker.com/r/s7anley/redis-sentinel-docker/) [![](https://badge.imagelayers.io/s7anley/redis-sentinel-docker:latest.svg)](https://imagelayers.io/?images=s7anley/redis-sentinel-docker:latest)
 
 redis-sentinel-docker
 ===
@@ -43,10 +41,10 @@ In case of mapping, configure IP address of sentinel server. Read more in [docum
 In case of mapping, configure mapped port of sentinel server. Read more in [documentation](Sentinel, Docker, NAT, and possible issues).
 
 `DOWN_AFTER`
-Time in milliseconds an instance should not be reachable for a Sentinel starting to think it is down. Default value `1500`.
+Time in milliseconds an instance should not be reachable for a Sentinel starting to think it is down. Default value `30000`.
 
 `FAILOVER_TIMEOUT`
-Wait time before failover retry of the same master. Default value `30000`.
+Wait time before failover retry of the same master. Default value `180000`.
 
 `PARALLEL_SYNCS`
 Sets the number of slaves that can be reconfigured to use the new master after a failover at the same time. Default value `1`.
