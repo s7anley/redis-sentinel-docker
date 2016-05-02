@@ -3,7 +3,7 @@ MAINTAINER Ján Koščo (@s7anley)
 
 RUN set -x \
     && apk update \
-    && apk add curl
+    && apk add curl bash
 
 ADD docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh

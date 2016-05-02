@@ -27,7 +27,7 @@ How to use this image
  In documentation is suggested to add Sentinel one one at a time, in order to still guarantee that majority can be achieved only in one side of a partition, in the chance failures should happen in the process of adding new Sentinels. Recommended delay is 30 seconds.
 
 ```sh
-$ docker run --name redis-sentinel_1 -d -e QUORUM=2 -e MASTER_IP=<some ip address> redis-sentinel`
+$ docker run --name redis-sentinel_1 -d -e QUORUM=2 -e MASTER_IP=<some ip address> redis-sentinel
 ```
 
 Sentinel, Docker and possible issues
@@ -40,11 +40,11 @@ Amazon EC2 Container Service currently doesn't support `host` network setting, t
 
 Environment Variables
 ---
-`MASTER_IP`
-Redis master IP address.
+`MASTER`
+Colon-separated IP address and port or Redis master. Port is optional, `DEFAULT_PORT` is used when missing. E.g. `ip_address` or `ip_address:port`.
 
-`MASTER_PORT`
-Redis master port. Default value is `6379`.
+`DEFAULT_PORT`
+Default port of Redis servers. Default value is `6379`.
 
 `GROUP_NAME`
 Unique name for master group. Default value is `mymaster`.
@@ -60,7 +60,7 @@ Wait time before failover retry of the same master. Default value `180000`.
 
 `PARALLEL_SYNCS` - Sets the number of slaves that can be reconfigured to use the new master after a failover at the same time. Default value `1`.
 
-`SLAVES` - Manually setting of all the slaves of monitored master. Format is a colon-separated IP address and port for each slave server. Multiple slaves are separated by a semicolon. E.g. `ip_address:host;ip_address:host`.
+`SLAVES` - Manually setting of all the slaves of monitored master. Accepted format is a colon-separated IP address and port for each slave server. Multiple slaves are separated by a semicolon. E.g. `ip_address:host;ip_address`.
 
 `ANNOUNCE_IP` - Host machine IP address.
 

@@ -12,7 +12,7 @@ services:
         image: redis-sentinel
         environment:
             - QUORUM=1
-            - MASTER_IP=redis_master
-            - SLAVES=redis_slave:6379
+            - MASTER=redis_master
+            - SLAVES=redis_slave
         depends_on:
             - redis_master
