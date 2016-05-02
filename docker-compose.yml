@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+    redis_master:
+        image: redis:3.0.7-alpine
+
+    redis_slave:
+        image: redis:3.0.7-alpine
+
+    sentinel:
+        build: .
+        image: redis-sentinel
+        environment:
+            - QUORUM=1
+            - MASTER_IP=redis_master
+            - SLAVES=redis_slave:6379
+        depends_on:
+            - redis_master

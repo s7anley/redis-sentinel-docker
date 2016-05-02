@@ -1,4 +1,4 @@
-[![Docker Pulls](https://img.shields.io/docker/pulls/s7anley/redis-sentinel-docker.svg)](https://hub.docker.com/r/s7anley/redis-sentinel-docker/) [![Docker Stars](https://img.shields.io/docker/stars/s7anley/redis-sentinel-docker.svg)](https://hub.docker.com/r/s7anley/redis-sentinel-docker/) [![](https://badge.imagelayers.io/s7anley/redis-sentinel-docker:latest.svg)](https://imagelayers.io/?images=s7anley/redis-sentinel-docker:latest)
+[![](https://badge.imagelayers.io/s7anley/redis-sentinel-docker:latest.svg)](https://imagelayers.io/?images=s7anley/redis-sentinel-docker:latest)
 
 redis-sentinel-docker
 ===
@@ -11,13 +11,24 @@ Redis Sentinel
 Redis Sentinel provides high availability for Redis. In practical terms this means that using Sentinel you can create a Redis deployment that resists without human intervention to certain kind of failures.
 Additionally also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
 
+Demo
+---
+For demonstration purposes you can use `docker-compose up -d` to bootstrap one redis master and slave and single sentinel to monitor them.
+
+To obtain confirm, that everything is working, we can ask for current master IP address with command:
+```sh
+$ docker exec redissentineldocker_sentinel_1 redis-cli -p 26379 sentinel get-master-addr-by-name mymaster
+```
+
+You can find all available sentinel commands in [documentation](http://redis.io/topics/sentinel#sentinel-commands)
+
 How to use this image
 ---
-Simple development example. Let say redis server is running at internal address 172.17.0.2.
+ In documentation is suggested to add Sentinel one one at a time, in order to still guarantee that majority can be achieved only in one side of a partition, in the chance failures should happen in the process of adding new Sentinels. Recommended delay is 30 seconds.
 
-`docker run --name redis-sentinel_1 -d -e QUORUM=1 -e MASTER_IP=172.17.0.2 redis-sentinel`
-
-Sentinel with start monitoring Redis instance running on provided IP address and Sentinel auto discovery will take care of finding slaves on other sentinels which are monitoring same master.
+```sh
+$ docker run --name redis-sentinel_1 -d -e QUORUM=2 -e MASTER_IP=<some ip address> redis-sentinel`
+```
 
 Sentinel, Docker and possible issues
 ---
