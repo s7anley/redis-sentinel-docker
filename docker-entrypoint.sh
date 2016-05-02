@@ -11,9 +11,6 @@ fi
 QUORUM=$QUORUM
 : ${QUORUM:=2}
 
-GROUP_NAME=$GROUP_NAME
-: ${GROUP_NAME:=mymaster}
-
 DEFAULT_PORT=$DEFAULT_PORT
 : ${DEFAULT_PORT:=6379}
 
@@ -40,13 +37,13 @@ parse_addr () {
 print_slave () {
     local -a ADDR
     parse_addr ADDR $1
-    echo "sentinel known-slave $GROUP_NAME ${ADDR[0]} ${ADDR[1]}" >> $SENTINEL_CONFIGURATION_FILE
+    echo "sentinel known-slave $MASTER_NAME ${ADDR[0]} ${ADDR[1]}" >> $SENTINEL_CONFIGURATION_FILE
 }
 
 print_master () {
     local -a ADDR
     parse_addr ADDR $1
-    echo "sentinel monitor $GROUP_NAME ${ADDR[0]} ${ADDR[1]} $QUORUM" >> $SENTINEL_CONFIGURATION_FILE
+    echo "sentinel monitor $MASTER_NAME ${ADDR[0]} ${ADDR[1]} $QUORUM" >> $SENTINEL_CONFIGURATION_FILE
 }
 
 echo "port 26379" >> $SENTINEL_CONFIGURATION_FILE
@@ -59,18 +56,20 @@ if [ "$ANNOUNCE_PORT" ]; then
     echo "sentinel announce-port $ANNOUNCE_PORT" >> $SENTINEL_CONFIGURATION_FILE
 fi
 
-print_master $MASTER
-echo "sentinel down-after-milliseconds $GROUP_NAME $DOWN_AFTER" >> $SENTINEL_CONFIGURATION_FILE
-echo "sentinel failover-timeout $GROUP_NAME $FAILOVER_TIMEOUT" >> $SENTINEL_CONFIGURATION_FILE
-echo "sentinel parallel-syncs $GROUP_NAME $PARALLEL_SYNCS" >> $SENTINEL_CONFIGURATION_FILE
+if [ "$MASTER_NAME" ]; then
+    print_master $MASTER
+    echo "sentinel down-after-milliseconds $MASTER_NAME $DOWN_AFTER" >> $SENTINEL_CONFIGURATION_FILE
+    echo "sentinel failover-timeout $MASTER_NAME $FAILOVER_TIMEOUT" >> $SENTINEL_CONFIGURATION_FILE
+    echo "sentinel parallel-syncs $MASTER_NAME $PARALLEL_SYNCS" >> $SENTINEL_CONFIGURATION_FILE
 
-if [ "$SLAVES" ]; then
-    for SLAVE in $(echo $SLAVES | tr ";" "\n")
-    do
-        if [ "$SLAVE" ]; then
-            print_slave $SLAVE
-        fi
-    done
+    if [ "$SLAVES" ]; then
+        for SLAVE in $(echo $SLAVES | tr ";" "\n")
+        do
+            if [ "$SLAVE" ]; then
+                print_slave $SLAVE
+            fi
+        done
+    fi
 fi
 
 redis-server $SENTINEL_CONFIGURATION_FILE --sentinel

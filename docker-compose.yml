@@ -11,6 +11,7 @@ services:
         build: .
         image: redis-sentinel
         environment:
+            - MASTER_NAME=mymaster
             - QUORUM=1
             - MASTER=redis_master
             - SLAVES=redis_slave

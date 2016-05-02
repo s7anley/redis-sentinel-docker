@@ -46,8 +46,8 @@ Colon-separated IP address and port or Redis master. Port is optional, `DEFAULT_
 `DEFAULT_PORT`
 Default port of Redis servers. Default value is `6379`.
 
-`GROUP_NAME`
-Unique name for master group. Default value is `mymaster`.
+`MASTER_NAME`
+Unique name for master. When defined, monitoring will be initialized.
 
 `QUORUM`
 Number of Sentinels that need to agree about the fact the master is not reachable, in order for really mark the slave as failing, and eventually start a fail over procedure if possible. Default value is `2`.
