@@ -19,10 +19,18 @@ Simple development example. Let say redis server is running at internal address 
 
 Sentinel with start monitoring Redis instance running on provided IP address and Sentinel auto discovery will take care of finding slaves on other sentinels which are monitoring same master.
 
+Sentinel, Docker and possible issues
+---
+Running sentinel with network setting `bridge` will break Sentinel's auto-discovery, unless you instruct Docker to map the port 1:1. To force Sentinel to announce a specific IP (e.g. your host machine) and mapped port, you should use `ANNOUNCE_IP` and `ANNOUNCE_PORT` environment variables. For more information see [documentation](http://redis.io/topics/sentinel#sentinel-docker-nat-and-possible-issues).
+
+AWS ECS
+---
+Amazon EC2 Container Service currently doesn't support `host` network setting, therefore Sentinel has to announce IP address of  host machine. Setting variable `AWS_IP_DISCOVERY` to true, will force auto discovery of internal IP address of EC2 machine. For further explanation see section above.
+
 Environment Variables
 ---
 `MASTER_IP`
-IP address of running Redis master.
+Redis master IP address.
 
 `MASTER_PORT`
 Redis master port. Default value is `6379`.
@@ -31,14 +39,7 @@ Redis master port. Default value is `6379`.
 Unique name for master group. Default value is `mymaster`.
 
 `QUORUM`
-Number of Sentinels that need to agree about the fact the master is not reachable, in order for really mark the slave as failing, and eventually start a fail over procedure if possible.
-Default value is `2`.
-
-`ANNOUNCE_IP`
-In case of mapping, configure IP address of sentinel server. Read more in [documentation](Sentinel, Docker, NAT, and possible issues).
-
-`ANNOUNCE_PORT`
-In case of mapping, configure mapped port of sentinel server. Read more in [documentation](Sentinel, Docker, NAT, and possible issues).
+Number of Sentinels that need to agree about the fact the master is not reachable, in order for really mark the slave as failing, and eventually start a fail over procedure if possible. Default value is `2`.
 
 `DOWN_AFTER`
 Time in milliseconds an instance should not be reachable for a Sentinel starting to think it is down. Default value `30000`.
@@ -46,11 +47,13 @@ Time in milliseconds an instance should not be reachable for a Sentinel starting
 `FAILOVER_TIMEOUT`
 Wait time before failover retry of the same master. Default value `180000`.
 
-`PARALLEL_SYNCS`
-Sets the number of slaves that can be reconfigured to use the new master after a failover at the same time. Default value `1`.
+`PARALLEL_SYNCS` - Sets the number of slaves that can be reconfigured to use the new master after a failover at the same time. Default value `1`.
 
-`SLAVES`
-Manually configure all the slaves of monitored master. Expected format: `ip_address:host;ip_address:host`.
+`SLAVES` - Manually setting of all the slaves of monitored master. Format is a colon-separated IP address and port for each slave server. Multiple slaves are separated by a semicolon. E.g. `ip_address:host;ip_address:host`.
+
+`ANNOUNCE_IP` - Host machine IP address.
+
+`ANNOUNCE_PORT` - Mapped sentinel port.
 
 `AWS_IP_DISCOVERY`
 Use internal IP address of AWS EC2 machine as `ANNOUNCE_IP`.
