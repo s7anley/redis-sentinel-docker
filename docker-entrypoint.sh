@@ -61,6 +61,12 @@ if [ "$MASTER_NAME" ]; then
     echo "sentinel down-after-milliseconds $MASTER_NAME $DOWN_AFTER" >> $SENTINEL_CONFIGURATION_FILE
     echo "sentinel failover-timeout $MASTER_NAME $FAILOVER_TIMEOUT" >> $SENTINEL_CONFIGURATION_FILE
     echo "sentinel parallel-syncs $MASTER_NAME $PARALLEL_SYNCS" >> $SENTINEL_CONFIGURATION_FILE
+    if [ "$NOTIFICATION_SCRIPT" ]; then
+      echo "sentinel notification-script $MASTER_NAME $NOTIFICATION_SCRIPT" >> $SENTINEL_CONFIGURATION_FILE
+    fi
+    if [ "$CLIENT_RECONFIG_SCRIPT" ]; then
+      echo "sentinel client-reconfig-script $MASTER_NAME $CLIENT_RECONFIG_SCRIPT" >> $SENTINEL_CONFIGURATION_FILE
+    fi
 
     if [ "$SLAVES" ]; then
         for SLAVE in $(echo $SLAVES | tr ";" "\n")
