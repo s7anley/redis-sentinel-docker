@@ -75,10 +75,10 @@ Wait time before failover retry of the same master. Default value `180000`.
 `NOTIFICATION_SCRIPT` - Manually setting notification-script of $MASTER if variable NOTIFICATION_SCRIPT is set. Script must be exist and executable or container will fail to start.
 
 `CLIENT_RECONFIG_SCRIPT` - Manually setting client-reconfig-script of $MASTER if variable CLIENT_RECONFIG_SCRIPT is set. Script must be exist and executable or container will fail to start.
-
 `ANNOUNCE_IP` - Host machine IP address.
 
 `ANNOUNCE_PORT` - Mapped sentinel port.
 
 `AWS_IP_DISCOVERY`
 Use internal IP address of AWS EC2 machine as `ANNOUNCE_IP`.
+
