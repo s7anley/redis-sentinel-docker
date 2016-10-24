@@ -47,10 +47,13 @@ Amazon EC2 Container Service currently doesn't support `host` network setting, t
 
 Environment Variables
 ---
+`DEFAULT_PORT`
+Default port of sentinel. Default value is `26379`.
+
 `MASTER`
 Colon-separated IP address and port or Redis master. Port is optional, `DEFAULT_PORT` is used when missing. E.g. `ip_address` or `ip_address:port`.
 
-`DEFAULT_PORT`
+`MASTER_PORT`
 Default port of Redis servers. Default value is `6379`.
 
 `MASTER_NAME`
@@ -71,7 +74,7 @@ Wait time before failover retry of the same master. Default value `180000`.
 
 `NOTIFICATION_SCRIPT` - Manually setting notification-script of $MASTER if variable NOTIFICATION_SCRIPT is set. Script must be exist and executable or container will fail to start.
 
-`CLIENT_RECONFIG_SCRIPT` - Manually setting client-reconfig-script of $MASTER if variable is CLIENT_RECONFIG_SCRIPT set. Script must be exist and executable or container will fail to start.
+`CLIENT_RECONFIG_SCRIPT` - Manually setting client-reconfig-script of $MASTER if variable CLIENT_RECONFIG_SCRIPT is set. Script must be exist and executable or container will fail to start.
 
 `ANNOUNCE_IP` - Host machine IP address.
 

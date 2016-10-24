@@ -12,7 +12,10 @@ QUORUM=$QUORUM
 : ${QUORUM:=2}
 
 DEFAULT_PORT=$DEFAULT_PORT
-: ${DEFAULT_PORT:=6379}
+: ${DEFAULT_PORT:=26379}
+
+MASTER_PORT=$MASTER_PORT
+: ${MASTER_PORT:=6379}
 
 DOWN_AFTER=$DOWN_AFTER
 : ${DOWN_AFTER:=30000}
@@ -28,7 +31,7 @@ parse_addr () {
     IFS=':' read -ra ADDR <<< "$2"
 
     if [ "${ADDR[1]}" = "" ]; then
-        ADDR[1]=$DEFAULT_PORT
+        ADDR[1]=$MASTER_PORT
     fi
 
     eval $_retvar='("${ADDR[@]}")'
@@ -46,7 +49,7 @@ print_master () {
     echo "sentinel monitor $MASTER_NAME ${ADDR[0]} ${ADDR[1]} $QUORUM" >> $SENTINEL_CONFIGURATION_FILE
 }
 
-echo "port 26379" >> $SENTINEL_CONFIGURATION_FILE
+echo "port $DEFAULT_PORT" >> $SENTINEL_CONFIGURATION_FILE
 
 if [ "$ANNOUNCE_IP" ]; then
     echo "sentinel announce-ip $ANNOUNCE_IP" >> $SENTINEL_CONFIGURATION_FILE
