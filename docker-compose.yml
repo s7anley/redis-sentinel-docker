@@ -15,5 +15,8 @@ services:
             - QUORUM=1
             - MASTER=redis_master
             - SLAVES=redis_slave
+            - SENTINEL_PORT=26380
+        expose:
+            - 26380
         depends_on:
             - redis_master

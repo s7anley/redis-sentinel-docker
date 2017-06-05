@@ -16,7 +16,7 @@ Additionally also provides other collateral tasks such as monitoring, notificati
 
 Demo
 ---
-For demonstration purposes you can use `docker-compose up -d` to bootstrap one redis master and slave and single sentinel to monitor them.
+For demonstration purposes you can use `docker-compose up -d` to bootstrap one redis master and slave and single sentinel to monitor them. In case you want to simulate sentinel cluster, scale number of sentinels with `docker-compose scale sentinel=3`.
 
 To obtain confirm, that everything is working, we can ask for current master IP address with command:
 ```sh
@@ -47,35 +47,30 @@ Amazon EC2 Container Service currently doesn't support `host` network setting, t
 
 Environment Variables
 ---
-`MASTER`
-Colon-separated IP address and port or Redis master. Port is optional, `DEFAULT_PORT` is used when missing. E.g. `ip_address` or `ip_address:port`.
+`MASTER` - Colon-separated IP address and port or Redis master. Port is optional, `REDIS_PORT` is used when missing. E.g. `ip_address` or `ip_address:port`.
 
-`DEFAULT_PORT`
-Default port of Redis servers. Default value is `6379`.
+`REDIS_PORT` - Port on which is master available. Default value is `6379`.
 
-`MASTER_NAME`
-Unique name for master. When defined, monitoring will be initialized.
+`SENTINEL_PORT` - A port on which sentinel is communicating. A default value is `26379`. In case you change this value, don't forget to expose additional port manually. By default, only `26379` is exposed.
 
-`QUORUM`
-Number of Sentinels that need to agree about the fact the master is not reachable, in order for really mark the slave as failing, and eventually start a fail over procedure if possible. Default value is `2`.
+`MASTER_NAME` - Unique name for master. When defined, monitoring will be initialized.
 
-`DOWN_AFTER`
-Time in milliseconds an instance should not be reachable for a Sentinel starting to think it is down. Default value `30000`.
+`QUORUM` - Number of Sentinels that need to agree about the fact the master is not reachable, in order for really mark the slave as failing, and eventually start a fail over procedure if possible. Default value is `2`.
 
-`FAILOVER_TIMEOUT`
-Wait time before failover retry of the same master. Default value `180000`.
+`DOWN_AFTER` - Time in milliseconds an instance should not be reachable for a Sentinel starting to think it is down. Default value `30000`.
+
+`FAILOVER_TIMEOUT` - Wait time before failover retry of the same master. Default value `180000`.
 
 `PARALLEL_SYNCS` - Sets the number of slaves that can be reconfigured to use the new master after a failover at the same time. Default value `1`.
 
 `SLAVES` - Manually setting of all the slaves of monitored master. Accepted format is a colon-separated IP address and port for each slave server. Multiple slaves are separated by a semicolon. E.g. `ip_address:host;ip_address`.
 
-`NOTIFICATION_SCRIPT` - Manually setting notification-script of $MASTER if variable NOTIFICATION_SCRIPT is set. Script must be exist and executable or container will fail to start.
+`NOTIFICATION_SCRIPT` - Manually setting of notification-script on master. Script must exists and be executable or container will fail to start.
 
-`CLIENT_RECONFIG_SCRIPT` - Manually setting client-reconfig-script of $MASTER if variable is CLIENT_RECONFIG_SCRIPT set. Script must be exist and executable or container will fail to start.
+`CLIENT_RECONFIG_SCRIPT` - Manually setting of client-reconfig-script on master. Script must exists and be executable or container will fail to start.
 
 `ANNOUNCE_IP` - Host machine IP address.
 
 `ANNOUNCE_PORT` - Mapped sentinel port.
 
-`AWS_IP_DISCOVERY`
-Use internal IP address of AWS EC2 machine as `ANNOUNCE_IP`.
+`AWS_IP_DISCOVERY` - Use internal IP address of AWS EC2 machine as `ANNOUNCE_IP`.
