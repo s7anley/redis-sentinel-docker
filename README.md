@@ -13,6 +13,10 @@ Redis Sentinel
 Redis Sentinel provides high availability for Redis. In practical terms this means that using Sentinel you can create a Redis deployment that resists without human intervention to certain kind of failures.
 Additionally also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
 
+Supported tags and respective Dockerfile links
+---
+- `3.0.7`, `3.0` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile-3.0)
+- `3.2.9`, `3.2`, `latest` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile
 
 Demo
 ---
