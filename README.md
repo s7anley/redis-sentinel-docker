@@ -4,8 +4,8 @@
 redis-sentinel-docker
 ===
 
-Dockerfile for [Redis Sentinel](http://redis.io/topics/sentinel). Image is available directly from [public docker registry](https://registry.hub.docker.com/).
-This image is updated via [pull requests to the `s7anley/redis-sentinel-docker` GitHub repo](https://github.com/s7anley/redis-sentinel-docker).
+Dockerfiles for [Redis Sentinel](http://redis.io/topics/sentinel) based on alpine images, suitable for the production environment. Image is available directly from [public docker registry](https://registry.hub.docker.com/).
+This images are updated via [pull requests to the `s7anley/redis-sentinel-docker` GitHub repo](https://github.com/s7anley/redis-sentinel-docker).
 
 
 Redis Sentinel
@@ -16,7 +16,7 @@ Additionally also provides other collateral tasks such as monitoring, notificati
 Supported tags and respective Dockerfile links
 ---
 - `3.0.7`, `3.0` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile-3.0)
-- `3.2.9`, `3.2`, `latest` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile
+- `3.2.9`, `3.2`, `latest` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile)
 
 Demo
 ---
