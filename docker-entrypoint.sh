@@ -79,4 +79,4 @@ if [ "$MASTER_NAME" ]; then
     fi
 fi
 
-redis-server $SENTINEL_CONFIGURATION_FILE --sentinel
+exec redis-server $SENTINEL_CONFIGURATION_FILE --sentinel
