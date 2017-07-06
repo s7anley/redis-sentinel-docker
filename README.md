@@ -35,7 +35,7 @@ How to use this image
  In documentation is suggested to add Sentinel one one at a time, in order to still guarantee that majority can be achieved only in one side of a partition, in the chance failures should happen in the process of adding new Sentinels. Recommended delay is 30 seconds.
 
 ```sh
-$ docker run --name redis-sentinel_1 -d -e QUORUM=2 -e MASTER_IP=<some ip address> redis-sentinel
+$ docker run --name redis-sentinel_1 -d -e QUORUM=2 -e MASTER=<some ip address> redis-sentinel
 ```
 
 
