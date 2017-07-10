@@ -69,6 +69,10 @@ if [ "$MASTER_NAME" ]; then
       echo "sentinel client-reconfig-script $MASTER_NAME $CLIENT_RECONFIG_SCRIPT" >> $SENTINEL_CONFIGURATION_FILE
     fi
 
+    if [ "$AUTH_PASS" ]; then
+      echo "sentinel auth-pass $MASTER_NAME $AUTH_PASS" >> $SENTINEL_CONFIGURATION_FILE
+    fi
+
     if [ "$SLAVES" ]; then
         for SLAVE in $(echo $SLAVES | tr ";" "\n")
         do
