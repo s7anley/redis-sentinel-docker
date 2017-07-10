@@ -78,3 +78,5 @@ Environment Variables
 `ANNOUNCE_PORT` - Mapped sentinel port.
 
 `AWS_IP_DISCOVERY` - Use internal IP address of AWS EC2 machine as `ANNOUNCE_IP`.
+
+`AUTH_PASS` - Authentication password to use when connecting to master.
