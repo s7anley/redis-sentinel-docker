@@ -1,7 +1,4 @@
-[![](https://badge.imagelayers.io/s7anley/redis-sentinel-docker:latest.svg)](https://imagelayers.io/?images=s7anley/redis-sentinel-docker:latest)
-
-
-redis-sentinel-docker
+redis-sentinel
 ===
 
 Dockerfiles for [Redis Sentinel](http://redis.io/topics/sentinel) based on alpine images, suitable for the production environment. Image is available directly from [public docker registry](https://registry.hub.docker.com/).
@@ -24,7 +21,7 @@ For demonstration purposes you can use `docker-compose up -d` to bootstrap one r
 
 To obtain confirm, that everything is working, we can ask for current master IP address with command:
 ```sh
-$ docker exec redissentineldocker_sentinel_1 redis-cli -p 26379 sentinel get-master-addr-by-name mymaster
+$ docker exec redissentineldocker_sentinel_1 redis-cli -p 26380 sentinel get-master-addr-by-name mymaster
 ```
 
 You can find all available sentinel commands in [documentation](http://redis.io/topics/sentinel#sentinel-commands)
