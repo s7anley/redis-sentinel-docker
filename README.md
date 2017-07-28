@@ -13,7 +13,8 @@ Additionally also provides other collateral tasks such as monitoring, notificati
 Supported tags and respective Dockerfile links
 ---
 - `3.0.7`, `3.0` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile-3.0)
-- `3.2.9`, `3.2`, `latest` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile)
+- `3.2.9`, `3.2` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile-3.2)
+- `4.0.1`, `4.0`, `latest` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile)
 
 Demo
 ---
