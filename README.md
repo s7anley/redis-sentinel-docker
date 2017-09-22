@@ -13,16 +13,16 @@ Additionally also provides other collateral tasks such as monitoring, notificati
 Supported tags and respective Dockerfile links
 ---
 - `3.0.7`, `3.0` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile-3.0)
-- `3.2.9`, `3.2` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile-3.2)
-- `4.0.1`, `4.0`, `latest` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile)
+- `3.2.11`, `3.2` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile-3.2)
+- `4.0.2`, `4.0`, `latest` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile)
 
 Demo
 ---
-For demonstration purposes you can use `docker-compose up -d` to bootstrap one redis master and slave and single sentinel to monitor them. In case you want to simulate sentinel cluster, scale number of sentinels with `docker-compose scale sentinel=3`.
+For demonstration purposes you can use `docker-compose up -d` to bootstrap one redis master and slave and single sentinel to monitor them. In case you want to simulate sentinel cluster, scale number of sentinels with `docker-compose up -d --scale sentinel=3`.
 
 To obtain confirm, that everything is working, we can ask for current master IP address with command:
 ```sh
-$ docker exec redissentineldocker_sentinel_1 redis-cli -p 26380 sentinel get-master-addr-by-name mymaster
+$ docker exec redissentineldocker_sentinel_1 redis-cli -p 26379 sentinel get-master-addr-by-name mymaster
 ```
 
 You can find all available sentinel commands in [documentation](http://redis.io/topics/sentinel#sentinel-commands)

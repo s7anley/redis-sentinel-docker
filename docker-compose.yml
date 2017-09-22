@@ -2,10 +2,10 @@ version: '2'
 
 services:
     redis_master:
-        image: redis:4.0.1-alpine
+        image: redis:4.0.2-alpine
 
     redis_slave:
-        image: redis:4.0.1-alpine
+        image: redis:4.0.2-alpine
 
     sentinel:
         build: .
@@ -15,8 +15,5 @@ services:
             - QUORUM=1
             - MASTER=redis_master
             - SLAVES=redis_slave
-            - SENTINEL_PORT=26380
-        expose:
-            - 26380
         depends_on:
             - redis_master
