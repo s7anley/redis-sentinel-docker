@@ -14,7 +14,7 @@ Supported tags and respective Dockerfile links
 ---
 - `3.0.7`, `3.0` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile-3.0)
 - `3.2.11`, `3.2` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile-3.2)
-- `4.0.5`, `4.0`, `latest` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile)
+- `4.0.6`, `4.0`, `latest` - [Dockerfile](https://github.com/s7anley/redis-sentinel-docker/Dockerfile)
 
 Demo
 ---
