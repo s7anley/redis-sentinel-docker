@@ -2,10 +2,10 @@ version: '2'
 
 services:
     redis_master:
-        image: redis:4.0.9-alpine
+        image: redis:4.0.10-alpine
 
     redis_slave:
-        image: redis:4.0.9-alpine
+        image: redis:4.0.10-alpine
 
     sentinel:
         build: .
