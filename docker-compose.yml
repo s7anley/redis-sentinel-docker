@@ -6,6 +6,9 @@ services:
 
     redis_slave:
         image: redis:4.0.10-alpine
+        command: redis-server --slaveof redis_master 6379
+        depends_on:
+            - redis_master
 
     sentinel:
         build: .
@@ -14,6 +17,5 @@ services:
             - MASTER_NAME=mymaster
             - QUORUM=1
             - MASTER=redis_master
-            - SLAVES=redis_slave
         depends_on:
             - redis_master

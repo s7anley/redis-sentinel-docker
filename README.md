@@ -19,11 +19,11 @@ Supported tags and respective Dockerfile links
 
 Demo
 ---
-For demonstration purposes you can use `docker-compose up -d` to bootstrap one redis master and slave and single sentinel to monitor them. In case you want to simulate sentinel cluster, scale number of sentinels with `docker-compose up -d --scale sentinel=3`.
+For demonstration purposes you can use `docker-compose -p sentinel up -d` to bootstrap one redis master and slave and single sentinel to monitor them. In case you want to simulate sentinel cluster, scale number of sentinels with `docker-compose -p sentinel up -d --scale sentinel=3`.
 
 To obtain confirm, that everything is working, we can ask for current master IP address with command:
 ```sh
-$ docker exec redissentineldocker_sentinel_1 redis-cli -p 26379 sentinel get-master-addr-by-name mymaster
+$ docker exec sentinel_sentinel_1 redis-cli -p 26379 sentinel get-master-addr-by-name mymaster
 ```
 
 You can find all available sentinel commands in [documentation](http://redis.io/topics/sentinel#sentinel-commands)
@@ -66,7 +66,7 @@ Environment Variables
 
 `PARALLEL_SYNCS` - Sets the number of slaves that can be reconfigured to use the new master after a failover at the same time. Default value `1`.
 
-`SLAVES` - Manually setting of all the slaves of monitored master. Accepted format is a colon-separated IP address and port for each slave server. Multiple slaves are separated by a semicolon. E.g. `ip_address:host;ip_address`.
+`SLAVES` - Manually setting of all the slaves of monitored master. Accepted format is a colon-separated IP address and port for each slave server. Multiple slaves are separated by a semicolon. E.g. `ip_address:host;ip_address`. Use only in-case your slave hosts could not be correctly resolved.
 
 `NOTIFICATION_SCRIPT` - Manually setting of notification-script on master. Script must exists and be executable or container will fail to start.
 
