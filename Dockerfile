@@ -1,4 +1,4 @@
-FROM redis:4.0.10-alpine
+FROM redis:4.0.14-alpine
 MAINTAINER Ján Koščo (@s7anley)
 
 RUN apk add --no-cache \
